@@ -1,0 +1,195 @@
+<% layout('layouts/boilerplate') %>
+<link rel="stylesheet" href="/stylesheets/addbusiness.css">
+<link rel="stylesheet" href="/stylesheets/submit-update.css">
+
+
+<div class="row mb-5">
+    <div class="bg-submit mb-5">
+        <h1 class="text-center text-white">Submit Your Business</h1>
+    </div>
+    <div class="col-6 offset-3">
+        <form action="/listings" method="POST" novalidate class="validated-form" enctype="multipart/form-data"> 
+            <div class="card shadow mb-3">
+                <div class="card-body">
+                    <!-- primary business details -->
+                    <div class="mb-3">
+                        <h2 class="bc-card-title">PRIMARY BUSINESS DETAILS</h2>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label bc-label" for="title">Business Title <span class="required-label">*</span></label>
+                        <input class="form-control" type="text" id="title" name="listing[title]"  required>
+                        <div class="invalid-feedback">
+                            Please provide business title.
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <div class="form-check">
+                                Does Your Business have a tagline?
+                            <input class="form-check-input" type="checkbox"  id="doCheck">
+                        </div>
+                        <div class="mt-3 mb-3" id="checkbox-checked" style="display:none;">
+                            <label class="form-label bc-label" for="tagline">Business Tagline</label>
+                            <input class="form-control" type="text" id="tagline" name="listing[tagline]">
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label bc-label" for="location">Business Address <span class="required-label">*</span></label>
+                        <input class="form-control" type="text" id="location" name="listing[location]" required>
+                        <div class="invalid-feedback">
+                            Please provide business address.
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label bc-label" for="phone">Phone Number</label>
+                        <input class="form-control" type="text" id="phone" name="listing[phone]" placeholder="111-111-1234">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label bc-label" for="website">Website</label>
+                        <input class="form-control" type="text" id="website" name="listing[website]" placeholder="https://">
+                    </div>
+                </div>
+            </div>
+            <div class="card shadow mb-3">
+                <div class="card-body">
+                    <!-- About -->
+                    <div class="mb-3">
+                        <h2 class="bc-card-title">About</h2>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label bc-label" for="description">Description <span class="required-label">*</span></label>
+                        <textarea class="form-control" type="text" id="description" name="listing[description]" required></textarea>
+                        <div class="invalid-feedback">
+                            Please provide description.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card shadow mb-3">
+                <div class="card-body">
+                    <!-- Image Upload -->
+                    <div class="mb-3">
+                        <h2 class="bc-card-title">CATEGORY & SERVICES</h2>
+                    </div>
+                    <div class="mb-3">
+                        <label for="inputCategory" class="form-label bc-label">Category <span class="required-label">*</span></label>
+                        <select class="form-select" aria-label="Default select example" name="listing[category]" id="inputCategory" required>
+                            <option value="" selected>Select Category</option>
+                            <% for(let category of categories) {%>
+                            <option value="<%= category %>"><%= category %></option>
+                            <% } %>
+                        </select>
+                        <div class="invalid-feedback">
+                            Please select a category.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card shadow mb-3">
+                <div class="card-body">
+                    <!-- Price Details -->
+                    <div class="mb-3">
+                        <h2 class="bc-card-title">Price Details</h2>
+                    </div>
+                    <div class="mb-3">
+                        <div class="row">
+                            <div class="col-4">
+                                <label for="inputRange" class="form-label bc-label">Price Range</label>
+                                <select class="form-select" aria-label="Default select example" name="listing[priceRange]" id="inputRange">
+                                    <option value="" selected>Select Price Range</option>
+                                    <option value="$">$ - Inexpensive</option>
+                                    <option value="$$">$$ - Moderate</option>
+                                    <option value="$$$">$$$ - Pricey</option>
+                                    <option value="$$$$">$$$$ - Ultra High</option>
+                                </select>
+                            </div>
+                            <div class="col-4">
+                                <label class="form-label bc-label" for="priceFrom">Price From</label>
+                                <input class="form-control" type="text" id="priceFrom" name="listing[priceFrom]" placeholder="Price From">
+                            </div>
+                            <div class="col-4">
+                                <label class="form-label bc-label" for="priceTo">Price To</label>
+                                <input class="form-control" type="text" id="priceTo" name="listing[priceTo]" placeholder="Price To">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card shadow mb-3">
+                <div class="card-body">
+                    <!-- FAQ -->
+                    <div class="mb-3">
+                        <h2 class="bc-card-title">FREQUENTLY ASKED QUESTIONS</h2>
+                    </div>
+                    <div class="faq-container mb-4">
+                        <div class="mb-3">
+                            <label class="form-label bc-label" for="faqQuestion">FAQ Question</label>
+                            <input type="text" class="form-control" id="faqQuestion" name="listing[faqs][0][faqQuestion]" placeholder="Question">
+                        </div>
+                        <div class="mb-3">
+                            <textarea class="form-control" name="listing[faqs][0][faqAnswer]" placeholder="Answer"></textarea>
+                        </div>
+                    </div>
+                    <div class="text-md-end">
+                        <a id="faqTab" class="add-new-div"><i class="fa-solid fa-square-plus fa-xl me-2" style="color: #41a6df;"></i>Add New</a>
+                    </div>
+                </div>
+            </div>
+            <div class="card shadow mb-3">
+                <div class="card-body">
+                    <!-- Image Upload -->
+                    <div class="mb-3">
+                        <h2 class="bc-card-title">Additional Details</h2>
+                    </div>
+                    <div class="mb-3">
+                        <div class="form-check form-switch form-check-inline mb-3">
+                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" name="listing[additionalDetails]" value="Credit Cards Accepted">
+                            <label class="form-check-label" for="flexSwitchCheckDefault">Accepts Credit cards</label>
+                        </div>
+                        <div class="form-check form-switch form-check-inline">
+                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" name="listing[additionalDetails]" value="Pets Friendly">
+                            <label class="form-check-label" for="flexSwitchCheckDefault">Pets Friendly</label>
+                        </div>
+                        <div class="form-check form-switch form-check-inline">
+                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" name="listing[additionalDetails]" value="Street Parking">
+                            <label class="form-check-label" for="flexSwitchCheckDefault">Street Parking</label>
+                        </div>
+                        <div class="form-check form-switch form-check-inline">
+                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" name="listing[additionalDetails]" value="Wireless Internet">
+                            <label class="form-check-label" for="flexSwitchCheckDefault">Wireless Internet</label>
+                        </div>
+                        <div class="form-check form-switch form-check-inline">
+                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" name="listing[additionalDetails]" value="Wheelchair Accessible">
+                            <label class="form-check-label" for="flexSwitchCheckDefault">Wheelchair Accessible</label>
+                        </div>
+                        <div class="form-check form-switch form-check-inline">
+                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" name="listing[additionalDetails]" value="24 Hours Open">
+                            <label class="form-check-label" for="flexSwitchCheckDefault">24 Hours Open</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card shadow">
+                <div class="card-body">
+                    <!-- Image Upload -->
+                    <div class="mb-3">
+                        <h2 class="bc-card-title">Media</h2>
+                    </div>
+                    <div class="mb-4">
+                        <label for="image" class="form-label bc-label">Upload Images <span class="required-label">*</span></label>
+                        <input  type="file" class="form-control" id="image" name="image" multiple required>
+                        <div class="invalid-feedback">
+                            Please upload image(s).
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <button class="btn loggin-register-btn">Submit Business</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- tagline toggle - faq create new div -->
+<script src="/javascripts/tagline.js"></script>
+<script src="/javascripts/FAQ.js"></script>

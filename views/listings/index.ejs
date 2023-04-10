@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BOILERPLATE!!!</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.13.0/mapbox-gl.css' rel='stylesheet' />
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.13.0/mapbox-gl.js'></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" crossorigin="">
+    <link rel="stylesheet" href="/stylesheets/app.css">
+    <link rel="stylesheet" href="/stylesheets/BusinessNav.css">
+    <link rel="stylesheet" href="/stylesheets/registersinging.css">
+    <link rel="stylesheet" href="/stylesheets/flash.css">
+    <link rel="stylesheet" href="/stylesheets/index-page.css">
+    <link rel="stylesheet" href="/stylesheets/footer.css">
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- jQuery UI -->
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.1/themes/smoothness/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.min.js"></script>
+</head>
+<body>
+    <div class="bc-header-full-width sticky-top">
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">
+                <img class="logo" src="../../src/home/logo.png" alt="logo">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse nav-text" id="navbarNavAltMarkup">
+                <div class="navbar-nav ms-auto">
+                    <a class="nav-link all-nav" href="/">Home</a>
+                    <div class="dropdown">
+                        <a class="nav-link all-nav dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Explore</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/listings" aria-current="true">All Categories</a></li>
+                            <% categories.forEach(category => { %>
+                                <li><a class="dropdown-item" href="/listings?category=<%= category%>" aria-current="true"><%= category%></a></li>
+                            <% }) %>
+                        </ul>
+                    </div>
+                    <a class="nav-link all-nav" href="/">About</a>
+                    <a class="nav-link all-nav" href="/">Contact Us</a>
+                    <% if(!currentUser) {%>
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-outline-light ms-3 button-text" data-bs-toggle="modal" data-bs-target="#login">Login | Register</button>
+                        <!-- Modal -->
+                        <%- include('../users/modal')%>
+                        <% } else {%>
+                            <a href="/logout" class="nav-link">Logout</a>
+                        <% } %>
+                        <a type="button" href="/listings/new" class="btn btn-primary ms-3 add-business-nav ">Add Business</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    </div>
+    <%- include('../partials/flash')%>
+<!-- full page -->
+    <div class="row main-section">
+        <!-- business section -->
+        <div class="col-md-6 col-sm-12 bc-main-container">
+            <div class="mb-4 mt-5">
+                <h3 class="search-term-title">
+                    <% if(category) { %>
+                    Results for <span class="search-term"><%= category %></span>
+                    <% } else {%>
+                        Most Recent <span class="search-term">Listings</span>
+                    <% } %>
+                </h3>
+            </div>  
+            <div class="mb-3 search-by">
+                <div class="row">
+                    <div class="col-9">
+                        <form action="/listings" method="GET">
+                            <div class="row gx-1">
+                                <div class="col-9">
+                                    <div class="form-group left-push">
+                                        <input type="text" name="search" placeholder="Search a Business" class="form-control" value="<%= search %>" id="search-input">
+                                        <div id="search-dropdown"></div>
+                                        </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="form-group right-push">
+                                        <button class="btn search-btn">
+                                            <i class="fa-solid fa-magnifying-glass" style="color: #ffffff;"></i>
+                                            Search
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-3">
+                        <div class="btn-group">
+                            <button type="button" class="btn dropdown-button dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fa fa-list"></i>
+                                <% if(category) { %>
+                                <%= category%>
+                                <% } else {%>
+                                    All Categories
+                                <% } %>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="/listings" aria-current="true">All Categories</a></li>
+                            <% categories.forEach(category => { %>
+                                <li><a class="dropdown-item" href="/listings?category=<%= category%>" aria-current="true"><%= category%></a></li>
+                            <% }) %>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <% if (listings.docs.length === 0 ) { %>
+                <div class="col-12 text-center mt-4">
+                    <h3>No Results</h3>
+                    <p>Sorry! There are no listings matching your search.</p>
+                    <p>Try changing your search input.</p>
+                </div>
+                <% } else { %>
+            <% listings.docs.forEach(function(listing) { %>
+            <div class="col-md-6 col-sm-12 bc-box-container">
+                <div class="card shadow border-0 mt-4">
+                <% if(listing.images.length) { %>
+                    <a href="/listings/<%= listing._id %>"><img id="img-fluid" class="card-img-top" src="<%= listing.images[0].url %>"></a>
+                <% } else { %>
+                    <img class="img-fluid" src="https://res.cloudinary.com/dw5kfr7dm/image/upload/v1679078736/BusinessConnect/umsbrcp82kkunskjunvu.jpg" alt="">
+                <% } %>
+                <div class="card-body p-4">
+                    <h5 class="card-title bc-title">
+                    <a href="/listings/<%= listing._id %>"><%= listing.title %></a>
+                    </h5>
+                    <p class="card-text bc-description"><%=listing.description.slice(0, 80)%></p>
+                    <div class="d-flex justify-content-between align-items-center">
+                    <% if (listing.reviews.length > 0) { %>
+                        <% let totalRating = 0 %>
+                        <% for(let review of listing.reviews) { %>
+                        <% totalRating += review.rating %>
+                        <% } %>
+                        <% const averageRating = Math.round(totalRating / listing.reviews.length) %>
+                        <div class="star-rating">
+                        <span class="stars-rating">
+                            <% for (let i = 1; i <= 5; i++) { %>
+                            <% if (i <= averageRating) { %>
+                                <i class="fas fa-star checked"></i>
+                            <% } else { %>
+                                <i class="far fa-star"></i>
+                            <% } %>
+                            <% } %>
+                        </span>
+                        <span class="bc-single-rating text-white"><strong><%= averageRating.toFixed(1) %>/5</strong></span>
+                        </div>
+                    <% } else { %>
+                        <div>
+                        <span class="no-reviews">Be the first to review!</span>
+                        </div>
+                    <% } %>
+                    <p class="card-text bc-location">
+                        <small><%= listing.location %></small>
+                    </p>
+                    </div>
+                </div>
+                </div>
+            </div>
+            <% }) %>
+            <%- include('../partials/paginate') %>
+        <% } %>
+        </div>
+    </div>
+    <!-- map section -->
+    <div class="col-md-6 col-sm-12">
+        <div id="cluster-map"></div>
+    </div>
+</div>
+    
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous"></script>
+    <script src="/javascripts/validateForms.js"></script>
+    <script>
+        const mapToken = '<%-process.env.MAPBOX_TOKEN%>';
+        const listings = {features: <%- JSON.stringify(listings.docs) %>};
+    </script>
+    <script src="/javascripts/clusterMap.js"></script>
+    <script src="/javascripts/autoComplete.js"></script>
+    </body>
+    </html>
+    

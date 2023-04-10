@@ -1,0 +1,38 @@
+<% layout('layouts/boilerplate') %>
+<link rel="stylesheet" href="/stylesheets/addbusiness.css">
+
+<main class="container mt-5 d-flex flex-column">
+    <div class="container justify-content-center align-items-center mt-5 mb-5">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <h2 class="card-title text-center">Login</h2>
+                        <form action="/login" method="POST" class="validated-form" novalidate>
+                            <div class="mb-3 mt-4">
+                                <label class="form-label" for="logUsername">Username <span class="required-label">*</span></label>
+                                <input class="form-control" type="text" id="logUsername" name="username" autofocus required>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="mb-4">
+                                <label class="form-label" for="logPassword">Password <span class="required-label">*</span></label>
+                                <input class="form-control" type="password" id="logPassword" name="password" required>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="d-grid gap-2 mb-4">
+                            <button class="btn loggin-register-btn">Login</button>
+                            </div>
+                        </form>
+                        <div>
+                            <a href="/register" class="sign-up-link">Not a member? Sign up</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

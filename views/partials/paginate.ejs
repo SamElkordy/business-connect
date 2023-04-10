@@ -1,0 +1,29 @@
+<div class="my-2">
+    <nav aria-label="Listing Pagination">
+      <ul class="pagination pagination-sm justify-content-center">
+        <% if(currentPage - 1) { %>
+          <li class="page-item">
+            <a class="page-link" href="/listings?page=<%= listings.page -1 %>">
+              <span area-hidden="true">&laquo;</span>
+            </a>
+          </li>
+        <% } %>
+        <% if(listings.totalPages > 1 && listings.docs.length) { %>
+          <% for(let i = startPage; i <= endPage; i++) { %>
+            <li class="page-item">
+              <a class="page-link" href="/listings?page=<%= i %>"
+                <%= i === listings.page ? 'style=background-color:#41A6DF;color:#ffffff;' : '' %>
+              ><%= i %></a>
+            </li>
+          <% } %>
+        <% } %>
+        <% if((currentPage + 1) <= totalPages) { %>
+          <li class="page-item">
+            <a class="page-link" href="/listings?page=<%= listings.page + 1 %>">
+              <span area-hidden="true">&raquo;</span>
+            </a>
+          </li>
+        <% } %>
+      </ul>
+    </nav>
+  </div>

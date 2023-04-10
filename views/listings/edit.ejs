@@ -1,0 +1,195 @@
+<% layout('layouts/boilerplate')%>
+<link rel="stylesheet" href="/stylesheets/addbusiness.css">
+<link rel="stylesheet" href="/stylesheets/submit-update.css">
+
+<div class="row mb-5">
+    <div class="bg-edit mb-5">
+        <h1 class="text-center text-white">Edit Your Business</h1>
+    </div>
+    <div class="col-6 offset-3">
+        <form action="/listings/<%=listing._id%>?_method=PUT" method="POST" novalidate class="validated-form" enctype="multipart/form-data">
+            <div class="card shadow mb-3">
+                <div class="card-body">
+                    <div class="mb-3">
+                        <h2 class="bc-card-title">PRIMARY BUSINESS DETAILS</h2>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label bc-label" for="title">Business Title <span class="required-label">*</span></label>
+                        <input class="form-control" type="text" id="title" name="listing[title]"
+                            value="<%=listing.title %>" required>
+                        <div class="invalid-feedback">
+                            Please provide business title.
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <div class="mt-3 mb-3" id="checkbox-checked">
+                            <label class="form-label bc-label" for="tagline">Business Tagline</label>
+                            <input class="form-control" type="text" id="tagline" name="listing[tagline]" value="<%=listing.tagline %>" required>
+                            <div class="invalid-feedback">
+                                Please provide tagline.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label bc-label" for="location">Business Address <span class="required-label">*</span></label>
+                        <input class="form-control" type="text" id="location" name="listing[location]"
+                            value="<%=listing.location %>" required>
+                        <div class="invalid-feedback">
+                            Please provide business address.
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label bc-label" for="phone">Phone Number</label>
+                        <input class="form-control" type="text" id="phone" name="listing[phone]" placeholder="123-456-7891" value="<%=listing.phone %>">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label bc-label" for="website">Website</label>
+                        <input class="form-control" type="text" id="website" name="listing[website]" placeholder="https://" value="<%=listing.website%>">
+                    </div>
+                </div>
+            </div>
+            <div class="card shadow mb-3">
+                <div class="card-body">
+                    <!-- About -->
+                    <div class="mb-3">
+                        <h2 class="bc-card-title">About</h2>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label bc-label" for="description">Description <span class="required-label">*</span></label>
+                        <textarea style="overflow:hidden" class="form-control" type="text" id="description" name="listing[description]" required><%= listing.description%></textarea>
+                        <div class="invalid-feedback">
+                            Please provide description.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card shadow mb-3">
+                <div class="card-body">
+                    <!-- Image Upload -->
+                    <div class="mb-3">
+                        <h2 class="bc-card-title">CATEGORY & SERVICES</h2>
+                    </div>
+                    <div class="mb-3">
+                        <label for="inputCategory" class="form-label bc-label">Category <span class="required-label">*</span></label>
+                        <select class="form-select" aria-label="Default select example" name="listing[category]" id="inputCategory" required>
+                            <option value="" selected>Select Category</option>
+                            <% for(let category of categories) {%>
+                            <option value="<%= category %>" <%= listing.category === category ? 'selected' : '' %>><%= category %></option>
+                            <% } %>
+                        </select>
+                        <div class="invalid-feedback">
+                            Please select a category.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card shadow mb-3">
+                <div class="card-body">
+                    <!-- Price Details -->
+                    <div class="mb-3">
+                        <h2 class="bc-card-title">Price Details</h2>
+                    </div>
+                    <div class="mb-3">
+                        <div class="row">
+                            <div class="col-4">
+                                <label for="inputRange" class="form-label bc-label">Price Range</label>
+                                <select class="form-select" aria-label="Default select example" name="listing[priceRange]" id="inputRange">
+                                    <option value="" selected>Select Price Range</option>
+                                    <option value="<%= listing.priceRange %>">$ - Inexpensive</option>
+                                    <option value="<%= listing.priceRange %>">$$ - Moderate</option>
+                                    <option value="<%= listing.priceRange %>">$$$ - Pricey</option>
+                                    <option value="$$$$">$$$$ - Ultra High</option>
+                                </select>
+                            </div>
+                            <div class="col-4">
+                                <label class="form-label bc-label" for="priceFrom">Price From</label>
+                                <input class="form-control" type="text" id="priceFrom" name="listing[priceFrom]" placeholder="Price From" value="<%= listing.priceFrom%>">
+                            </div>
+                            <div class="col-4">
+                                <label class="form-label bc-label" for="priceTo">Price To</label>
+                                <input class="form-control" type="text" id="priceTo" name="listing[priceTo]" placeholder="Price To" value="<%= listing.priceTo%>">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card shadow mb-3">
+                <div class="card-body">
+                    <!-- FAQ -->
+                    <div class="mb-3">
+                        <h2 class="bc-card-title">FREQUENTLY ASKED QUESTIONS</h2>
+                    </div>
+                    <div class="faq-container mb-4">
+                        <% listing.faqs.forEach(function(faq, index) { %>
+                        <div class="mb-3">
+                            <label class="form-label bc-label" for="faq">FAQ <%= index + 1 %></label>
+                            <input type="text" class="form-control" id="faq" name="listing[faqs][<%= index %>][faqQuestion]" placeholder="Question" value="<%= faq.faqQuestion %>">
+                        </div>
+                        <div class="mb-3">
+                            <textarea class="form-control" name="listing[faqs][<%= index %>][faqAnswer]" placeholder="Answer"><%= faq.faqAnswer %></textarea>
+                        </div>
+                        <% }) %>
+                    </div>
+                </div>
+            </div>
+            <div class="card shadow mb-3">
+                <div class="card-body">
+                    <!-- Image Upload -->
+                    <div class="mb-3">
+                        <h2 class="bc-card-title">Additional Details</h2>
+                    </div>
+                    <div class="mb-3">
+                        <div class="form-check form-switch form-check-inline mb-3">
+                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" name="listing[additionalDetails]" value="Credit Cards Accepted">
+                            <label class="form-check-label" for="flexSwitchCheckDefault" >Accepts Credit cards</label>
+                        </div>
+                        <div class="form-check form-switch form-check-inline">
+                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" name="listing[additionalDetails]" value="Pets Friendly">
+                            <label class="form-check-label" for="flexSwitchCheckDefault">Pets Friendly</label>
+                        </div>
+                        <div class="form-check form-switch form-check-inline">
+                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" name="listing[additionalDetails]" value="Street Parking">
+                            <label class="form-check-label" for="flexSwitchCheckDefault">Street Parking</label>
+                        </div>
+                        <div class="form-check form-switch form-check-inline">
+                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" name="listing[additionalDetails]" value="Wireless Internet">
+                            <label class="form-check-label" for="flexSwitchCheckDefault">Wireless Internet</label>
+                        </div>
+                        <div class="form-check form-switch form-check-inline">
+                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" name="listing[additionalDetails]" value="Wheelchair Accessible">
+                            <label class="form-check-label" for="flexSwitchCheckDefault">Wheelchair Accessible</label>
+                        </div>
+                        <div class="form-check form-switch form-check-inline">
+                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" name="listing[additionalDetails]" value="24 Hours Open">
+                            <label class="form-check-label" for="flexSwitchCheckDefault">24 Hours Open</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card shadow">
+                <div class="card-body">
+                    <div class="mb-3">
+                        <h2 class="bc-card-title">Media</h2>
+                    </div>
+                    <div class="mb-3">
+                        <label for="image" class="form-label bc-label">Upload New Images</label>
+                        <input  type="file" class="form-control" id="image" name="image" multiple>
+                    </div>
+                    <div class="mb-3">
+                        <div><label class="bc-label">Check the image(s) you would like to delete</label></div>
+                        <% listing.images.forEach(function(img, i){ %>
+                            <img src="<%= img.url%>" class="img-thumbnail" alt="">
+                            <div class="form-check-inline">
+                                <input type="checkbox" id="image-<%=i%>" name="deleteImages[]" value="<%=img.filename%>">
+                            </div>  
+                        <% }) %>
+                    </div>
+                    <div class="mb-3">
+                        <button class="btn loggin-register-btn">Update Business</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<script src="/javascripts/FAQ.js"></script>

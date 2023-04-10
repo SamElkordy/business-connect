@@ -1,0 +1,213 @@
+<% layout('layouts/boilerplate')%>
+<link rel="stylesheet" href="/stylesheets/stars.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+<link rel="stylesheet" href="/stylesheets/show-page.css">
+ <!-- Calculate the average rating -->
+ <% let totalRating = 0 %>
+ <% for(let review of listing.reviews) { %>
+     <% totalRating += review.rating %>
+ <% } %>
+ <% const averageRating = Math.round(totalRating / listing.reviews.length) %>
+
+
+<div class="d-flex flex-column show-hero">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <div>
+                    <h1 class="show-bc-title"><%= listing.title%></h1>
+                    <p class="show-bc-tagline"><%= listing.tagline%></p>
+                </div>
+                <div class="bc-rating text-white">
+                    <% if(totalRating >= 1) {%>
+                    <span class="bc-average-rating"><strong><%= averageRating?.toFixed(1) %>/5</strong></span>
+                    <% } %>
+                    <span class="bc-rating-count"><%= listing.reviews.length %> Reviews</span>
+                    <span class="spacing-dash"> - </span>
+                    <a href="#leaveReview" class="add-new-review text-white"><i class="fa fa-star" aria-hidden="true"></i>Add Review </a>
+                </div>
+                <div class="swiper">
+                    <div class="swiper-wrapper">
+                        <% listing.images.forEach((img, i) => {%>
+                            <div class="swiper-slide" <%= i ===0 ? 'active' : '' %>>
+                                <img src="<%= img.url %>" alt="<%= listing.title%>">
+                            </div>
+                        <% }) %>
+                    </div>
+                    <div class="prev">
+                        <svg class="prev-svg" width="10" height="15" viewBox="0 0 10 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9.2625 13.2375L3.5375 7.5L9.2625 1.7625L7.5 0L0 7.5L7.5 15L9.2625 13.2375Z" fill="#fff" />
+                        </svg>
+                    </div>
+                    <div class="next">
+                        <svg class="next-svg" width="10" height="15" viewBox="0 0 10 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M0.737305 13.2375L6.4623 7.5L0.737305 1.7625L2.4998 0L9.9998 7.5L2.4998 15L0.737305 13.2375Z" fill="#fff" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card mb-3">
+                    <div id='map'></div>
+                    
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item bc-sidebar-item"><i class="fa-solid fa-location-dot"></i> <%= listing.location%></li>
+                        <li class="list-group-item bc-sidebar-item"><i class="fa fa-list"></i>  <a class="category-link" href="/listings?category=<%= listing.category%>"><%= listing.category%></a></li>
+                        <li class="list-group-item bc-sidebar-item"><i class="fa-solid fa-mobile-screen-button"></i> <%= listing.phone %></li>
+                        <li class="list-group-item bc-sidebar-item"><i class="fa-solid fa-globe"></i> <%= listing.website %></li>
+                        <li class="list-group-item bc-sidebar-item">
+                            <span class="range-color"><%= listing.priceRange %></span>
+                            <span class="price-range">Price Range</span>
+                            <span class="price-bold"><%= listing.priceFrom %> - </span>  
+                            <span class="price-bold"><%= listing.priceTo %></span>
+                            
+                        </li>
+                        <li class="list-group-item bc-sidebar-item">Created by <%= listing.author.username%> on
+                            <%= moment(listing.createdAt).format('LL') %></li>
+                    </ul>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-8">
+            <!-- business description -->
+            <div class="mb-5 mt-5">
+                <h2 class="bc-section-title mb-3">About <%= listing.title %></h2>
+                <p><%= listing.description%></p>
+            </div>
+            <div class="mb-5">
+                <h2 class="bc-section-title mb-3">FAQs</h2>
+                <div class="accordion" id="faqAccordion">
+                    <% listing.faqs.forEach(function(faq, index) { %>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="faqHeader<%= index %>">
+                        <button class="accordion-button <%= index === 0 ? '' : 'collapsed' %>" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse<%= index %>" aria-expanded="<%= index === 0 ? 'true' : 'false' %>" aria-controls="faqCollapse<%= index %>">
+                            <i class="fa-solid fa-q me-3" style="color: #0a58ca;"></i> <%= faq.faqQuestion %>
+                        </button>
+                        </h2>
+                        <div id="faqCollapse<%= index %>" class="accordion-collapse collapse <%= index === 0 ? 'show' : '' %>" aria-labelledby="faqHeader<%= index %>" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                <%= faq.faqAnswer %>
+                            </div>
+                        </div>
+                    </div>
+                    <% }) %>
+                </div>
+            </div>
+            
+            <!-- Display the average rating in star format -->
+            <div class="mb-3">
+                <span class="bc-large-count"><%= listing.reviews.length %> Reviews For <%= listing.title %></span>
+                <% if(totalRating >= 1) {%>
+                <% const averageR = listing.reviews.reduce((sum, review) => sum + review.rating, 0) / listing.reviews.length %>
+                <span class="stars-rating"><%- '<span class="fa fa-star checked"></span>'.repeat(Math.round(averageR)) %><%- '<span class="far fa-star"></span>'.repeat(5 - Math.round(averageR)) %></span>
+                <span class="bc-single-rating text-white"><strong><%= averageRating.toFixed(1) %>/5</strong></span>
+                <% } %>
+            </div>
+            <% for(let review of listing.reviews) { %>
+                <div class="row mb-4">
+                <div class="col-12">
+                    <div class="p-3 border-top">
+                        <div class="row align-items-start">
+                            <div class="col-md-6 mb-3 mb-md-0">
+                              <h5 class="review-title h5 mb-1"><%= review.title %></h5>
+                              <p class="review-date text-muted"><%= moment(review.createdAt).format('LLL') %> by <strong><%= review.author.username %></strong></p>
+                            </div>
+                            <div class="col-md-6 text-md-end">
+                              <div class="rating d-inline-block">
+                                <span class="stars-rating me-2"><%- '<span class="fa fa-star checked"></span>'.repeat(review.rating) %><%- '<span class="far fa-star"></span>'.repeat(5 - review.rating) %></span>
+                                <span class="bc-single-rating text-white"><strong><%= review.rating.toFixed(1) %></strong></span>
+                              </div>
+                            </div>
+                          </div>
+                        <p class="review-body card-text mt-2"><%= review.body %></p>
+                        <% if(currentUser && review.author.equals(currentUser._id)) { %>
+                        <form action="/listings/<%=listing._id%>/reviews/<%=review._id%>?_method=DELETE" method="POST">
+                            <button class="btn btn-sm btn-danger">Delete</button>
+                        </form>
+                        <% } %>
+                    </div>
+                </div>
+                </div>
+            <% } %>
+            <!-- review form -->
+            <% if(currentUser) { %>
+            <div id="leaveReview" class="bg-light p-4">
+                <h2 class="mb-4 review-title">Write A Review</h2>
+                <form action="/listings/<%=listing._id%>/reviews" method="POST" class="validated-form" novalidate>
+                <div>
+                    <fieldset class="starability-basic">
+                    <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="1" checked aria-label="No rating." />
+                    <input type="radio" id="first-rate1" name="review[rating]" value="1" />
+                    <label for="first-rate1" title="Terrible">1 star</label>
+                    <input type="radio" id="first-rate2" name="review[rating]" value="2" />
+                    <label for="first-rate2" title="Not good">2 stars</label>
+                    <input type="radio" id="first-rate3" name="review[rating]" value="3" />
+                    <label for="first-rate3" title="Average">3 stars</label>
+                    <input type="radio" id="first-rate4" name="review[rating]" value="4" />
+                    <label for="first-rate4" title="Very good">4 stars</label>
+                    <input type="radio" id="first-rate5" name="review[rating]" value="5" />
+                    <label for="first-rate5" title="Amazing">5 stars</label>
+                    </fieldset>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label bc-label" for="title">Title <span class="required-label">*</span></label>
+                    <input class="form-control" type="text" id="title" name="review[title]" required>
+                    <div class="invalid-feedback">
+                    Review title is required
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label bc-label" for="body">Review <span class="required-label">*</span></label>
+                    <textarea class="form-control" name="review[body]" id="body" cols="30" rows="3" required></textarea>
+                    <div class="invalid-feedback">
+                    Review is required
+                    </div>
+                </div>
+                <button class="btn btn-primary mb-3 add-business-nav">Submit Review</button>
+                </form>
+            </div>
+            <% } else { %>
+                <a id="leaveReview" href="/login?returnTo=/listings/<%=listing._id%>" class="add-review-btn text-center">Add Review</a>
+            <% } %>
+        </div>
+        <div class="col-4 additional-info-container">
+            <div class="card">
+                <div class="card-body additional-main">
+                  <h5 class="card-title bc-section-title mb-2">ADDITIONAL DETAILS</h5>
+                  <ul class="list-group list-group-flush additional-info-list">
+                    <% for(let additional of listing.additionalDetails) { %>
+                        <li class="list-group-item d-flex justify-content-between">
+                            <%= additional %>
+                            <span class="text-end"><strong>Yes</strong></span>
+                          </li>
+                    <% } %>
+                  </ul>
+                </div>   
+              </div>
+        </div>
+    </div>
+</div>
+
+<% if(currentUser && listing.author.equals(currentUser._id)) { %>
+<div class="mt-3 mb-0 fixed-bottom success-style background-c alert alert-success alert-dismissible fade show" role="alert">
+    <form class="d-inline float-start" action="/listings/<%=listing._id%>?_method=DELETE" method="POST">
+        <button class="btn btn-danger delete-btn ">Delete Business</button>
+    </form> 
+    <a class="card-link btn btn-info float-end text-white edit-btn" href="/listings/<%=listing._id%>/edit">Edit Business</a>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+<% } %>
+
+<script>
+    const mapToken = '<%-process.env.MAPBOX_TOKEN%>';
+    const listing = <%- JSON.stringify(listing) %>;
+</script>
+<script src="/javascripts/showPageMap.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+<script src="/javascripts/showCarousel.js"></script>

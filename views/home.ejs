@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business Connect</title>
+    <link rel="stylesheet" href="/stylesheets/app.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" crossorigin="">
+    
+    <link rel="stylesheet" href="/stylesheets/home.css">
+    <link rel="stylesheet" href="/stylesheets/index-page.css">
+    <link rel="stylesheet" href="/stylesheets/registersinging.css">
+    <link rel="stylesheet" href="/stylesheets/footer.css">
+    <link rel="stylesheet" href="/stylesheets/flash.css">
+</head>
+<body>
+    
+    <!-- hero section -->
+    <div class="header-container bc-header-bg text-center text-white">
+        <div class="row hero-overlay">
+            <!-- nav -->
+            <div>
+                <nav class="navbar navbar-expand-lg">
+                    <div class="container-fluid">
+                        <a class="navbar-brand" href="/">
+                            <img class="logo" src="./src/home/logo.png" alt="logo">
+                        </a>
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse nav-text" id="navbarNavAltMarkup">
+                            <div class="navbar-nav ms-auto">
+                                <a class="nav-link home-nav" href="/">Home</a>
+                                <div class="dropdown">
+                                    <a class="nav-link all-nav dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Explore</a>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="/listings" aria-current="true">All Categories</a></li>
+                                        <li><a class="dropdown-item" href="/listings?category=Arts" aria-current="true">Arts</a></li>
+                                        <li><a class="dropdown-item" href="/listings?category=Automotive" aria-current="true">Automotive</a></li>
+                                        <li><a class="dropdown-item" href="/listings?category=Beauty" aria-current="true">Beauty</a></li>
+                                        <li><a class="dropdown-item" href="/listings?category=Health" aria-current="true">Health</a></li>
+                                        <li><a class="dropdown-item" href="/listings?category=Restaurant" aria-current="true">Restaurant</a></li>
+                                        <li><a class="dropdown-item" href="/listings?category=Services" aria-current="true">Services</a></li>
+                                        <li><a class="dropdown-item" href="/listings?category=Shopping" aria-current="true">Shopping</a></li>
+                                    </ul>
+                                </div>
+                                <a class="nav-link home-nav" href="/">About</a>
+                                <a class="nav-link home-nav" href="/">Contact Us</a>
+                                <% if(!currentUser) {%>
+                                    <!-- Button trigger modal -->
+                                    <button type="button" class="btn btn-outline-light ms-3 button-text" data-bs-toggle="modal" data-bs-target="#login">Login | Register</button>
+                                    <!-- Modal -->
+                                    <%- include('./users/modal')%>
+                                    <% } else {%>
+                                        <a href="/logout" class="nav-link">Logout</a>
+                                    <% } %>
+                                    <a type="button" href="/listings/new" class="btn btn-primary ms-3 add-business-nav ">Add Business</a>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+                <!-- hero -->
+            <div >
+                <div class="d-flex  flex-column p-3">
+                    <h1>Business Connect</h1>
+                    <h2>Connecting You With Incredible Businesses Near You</h2>   
+                </div>
+                <div>
+                    <a href="/listings" class="btn btn-secondary font-weight-bold border-white bg-white hero-btn-text">Browse Businesses</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <%- include('./partials/flash')%>
+    <div class="container section-spacing">
+      <h2 class="mb-4 categories-title mb-5 text-center">Popular Categories</h2>
+      <div class="row d-flex align-items-stretch">
+        <div class="col-md-4">
+          <div class="card h-100 position-relative">
+            <img src="/src/home/restaurant-cat.jpg" class="card-img-top h-100 object-fit-cover" alt="First image">
+            <a class="category-box category-text text-center" href="/listings?category=Restaurant">Restaurant</a>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card position-relative"  style="margin-bottom: 20px;" >
+            <img src="/src/home/arts-cat.jpg" class="card-img-top h-100 object-fit-cover" alt="Fourth image">
+            <a class="category-box category-text text-center" href="/listings?category=Arts">Arts</a>
+          </div>
+          <div class="card position-relative">
+            <img src="/src/home/services-cat.jpg" class="card-img-top h-100 object-fit-cover" alt="Fifth image">
+            <a class="category-box category-text text-center" href="/listings?category=Services">Services</a>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card position-relative"  style="margin-bottom: 20px;" >
+            <img src="/src/home/automotive-cat.jpg" class="card-img-top h-100 object-fit-cover" alt="Fourth image">
+            <a class="category-box category-text text-center" href="/listings?category=Automotive">Automotive</a>
+          </div>
+          <div class="card position-relative">
+            <img src="/src/home/real-estate-cat.jpg" class="card-img-top h-100 object-fit-cover" alt="Fifth image">
+            <a class="category-box category-text text-center" href="/listings?category=Shopping">Shopping</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="bg-why-us p-5 section-spacing">
+        <div class="container text-center">
+          <h2 class=" why-us-title mb-5">Why Choose Us?</h2>
+          <div class="row">
+            <div class="col-md-4">
+              <div class="why-us-icon mb-3"><i class="fas fa-cogs"></i></div>
+              <h4 class="mb-3 why-us-sub">Expertise</h4>
+              <p>Our team consists of highly experienced professionals who have a deep understanding of the industry.</p>
+            </div>
+            <div class="col-md-4">
+              <div class="why-us-icon mb-3"><i class="fas fa-medal"></i></div>
+              <h4 class="mb-3  why-us-sub">Quality</h4>
+              <p>We strive to provide high-quality services that meet the needs and expectations of our clients.</p>
+            </div>
+            <div class="col-md-4">
+              <div class="why-us-icon mb-3"><i class="fas fa-headset"></i></div>
+              <h4 class="mb-3 why-us-sub">Customer Service</h4>
+              <p>Our team is dedicated to providing excellent customer service and support to ensure the satisfaction of our clients.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="container section-spacing">
+        <h2 class="  cta-title text-center mb-5">Top Rated Listings</h2>
+        <div class="row">
+          <% topListings.forEach(function(listing) { %>
+            <div class="col-md-4">
+              <div class="card shadow border-0 mb-4">
+                <% if(listing.images.length) { %>
+                  <a href="/listings/<%= listing._id %>"><img class="card-img-top listing-image" src="<%= listing.images[0].url %>"></a>
+                <% } else { %>
+                  <img class="img-fluid listing-image" src="https://res.cloudinary.com/dw5kfr7dm/image/upload/v1679078736/BusinessConnect/umsbrcp82kkunskjunvu.jpg" alt="">
+                <% } %>
+                <div class="card-body p-4">
+                  <h5 class="card-title bc-title">
+                    <a href="/listings/<%= listing._id %>"><%= listing.title %></a>
+                  </h5>
+                  <p class="card-text bc-description"><%=listing.description.slice(0, 80)%></p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <% if (listing.reviews.length > 0) { %>
+                      <% let totalRating = 0 %>
+                      <% for(let review of listing.reviews) { %>
+                        <% totalRating += review.rating %>
+                      <% } %>
+                      <% const averageRating = Math.round(totalRating / listing.reviews.length) %>
+                      <div class="star-rating">
+                        <span class="stars-rating">
+                          <% for (let i = 1; i <= 5; i++) { %>
+                            <% if (i <= averageRating) { %>
+                              <i class="fas fa-star checked"></i>
+                            <% } else { %>
+                              <i class="far fa-star"></i>
+                            <% } %>
+                          <% } %>
+                        </span>
+                        <span class="bc-single-rating text-white"><strong><%= averageRating.toFixed(1) %>/5</strong></span>
+                      </div>
+                    <% } else { %>
+                      <div>
+                        <span class="no-reviews">Be the first to review!</span>
+                      </div>
+                    <% } %>
+                    <p class="card-text bc-location">
+                      <small><%= listing.location %></small>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <% }) %>
+        </div>
+      </div>
+
+      <div class="container cta  section-spacing text-center">
+            <div class=" p-5 cta-bg rounded">
+              <h2 class=" cta-title">Sign up now to create your free listing</h2>
+              <button type="button" class="btn cta-btn btn-lg mt-3 text-white" data-bs-toggle="modal" data-bs-target="#register">Sign up</button>
+            </div>
+      </div>
+      <%- include('./partials/footer') %>
+      
+    <!-- bootstrap Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous"></script>
+</body>
+</html>
