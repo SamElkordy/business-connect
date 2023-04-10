@@ -38,3 +38,9 @@ span.required-label {
     text-decoration: none;
     color: #333;
 }
+
+.register-spacing,
+.login-spacing {
+    margin-top: 90px;
+    margin-bottom: 90px;
+}
