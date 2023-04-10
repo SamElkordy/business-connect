@@ -23,7 +23,7 @@ body {
 }
 
 .header-container.bc-header-bg {
-    background-image: url(http://localhost:3000/src/home/home-hero.jpg);
+    background-image: url(/src/home/home-hero.jpg);
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
