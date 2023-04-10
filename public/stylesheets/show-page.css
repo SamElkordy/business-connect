@@ -1,0 +1,275 @@
+/* Average rating - Number of reviews */
+.bc-rating {
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+span.bc-average-rating {
+    font-size: 18px;
+    padding: 4px 10px;
+    margin-right: 10px;
+    border-radius: 4px;
+    background-color: #f5bd23;
+}
+
+span.bc-rating-count, .add-new-review {
+    font-size: 14px;
+}
+
+a.add-new-review {
+    text-decoration: none;
+}
+
+a.add-new-review:hover {
+    text-decoration: underline;
+}
+
+span.spacing-dash {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+
+
+/* Carousel */
+.swiper {
+    padding-bottom: 60px !important;
+    max-height: 270px;
+}
+
+.swiper-slide img {
+    border-radius: 5px;
+    height:270px;
+    width: 290px;
+    object-fit: cover;
+    transition: 0.2s;
+}
+
+.prev,
+.next {
+    cursor: pointer;
+    z-index: 100;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 1;
+    transition: 0.2s;
+    background-color: #fff;
+    padding: 10px;
+}
+
+.prev:hover,
+.next:hover {
+    opacity: 1;
+}
+
+
+svg {
+    width: 20px;
+    height: 20px;   
+}
+.prev-svg path,
+.next-svg path {
+    fill: #000;
+    
+}
+
+
+.prev {
+    left: 25px;
+}
+
+.next {
+    right: 25px;
+}
+
+/* main bg */
+.show-hero {
+    background-color: #1D2327;
+    padding: 50px 0;
+    max-height: 500px;
+}
+
+.show-bc-title,
+.show-bc-tagline {
+    color: #fff;
+}
+
+.show-bc-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 30px;
+}
+
+.show-bc-tagline {
+    font-size: 15px;
+}
+
+/* sidebar */
+
+.bc-sidebar-item {
+    color: #7f7f7f;
+    padding: 15px 0 15px 20px;
+}
+
+li i {
+    color: #7d7d7d;
+    margin-right: 10px;
+}
+
+.range-color {
+    color: #0a58ca;
+}
+
+span.price-bold {
+    font-weight: 800;
+}
+
+span.price-range {
+    margin-right: 7px;
+    margin-left: 7px;
+}
+
+li a.category-link {
+    text-decoration: none;
+    color: #7d7d7d;
+}
+li a.category-link:hover {
+    color: #333;
+}
+
+/* bottom bar */
+div.background-c {
+    background-color: rgba(0,0,0,0.5)!important;
+    border: none!important;
+}
+
+button.delete-btn {
+    font-size: 14px;
+    background-color: #fff!important;
+    border: none;
+    color: #333;
+}
+button.delete-btn:hover {
+    color: #333;
+}
+
+a.edit-btn {
+    font-size: 14px;
+    border: none;
+    color: #333;
+    background-color: #42A7DF;
+}
+
+.checked {
+    color: #f5bd23;
+  }
+
+
+/* reviews */
+
+span.bc-large-count,
+.bc-section-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+span.bc-large-count {
+    margin-right: 7px;
+}
+
+.stars-rating {
+    border: 1px solid #dedede;
+    border-right: none;
+    padding: 1px 5px;
+    margin-right: -4px!important;
+}
+
+span.bc-single-rating {
+    font-size: 16px;
+    padding: 2px 10px;
+    background-color: #f5bd23;
+}
+
+.bc-label {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+span.required-label {
+    color: red;
+}
+
+.review-title {
+    font-size: 16px;
+} 
+
+.review-body {
+    font-size: 14px;
+}
+
+.review-date {
+    font-size: 14px;
+}
+
+.add-review-btn {
+    background-color: #fafafa;
+    border: 1px solid #dedede;
+    border-radius: 5px;
+    float: left;
+    padding: 15px;
+    width: 100%;
+    text-decoration: none;
+    color: #333;
+    font-weight: 600;
+}
+
+/* FAQ Accordion */
+
+.accordion {
+    --bs-accordion-border-color: none;
+    --bs-accordion-border-width: none;
+    --bs-accordion-border-radius: none;
+    --bs-accordion-active-bg: none;
+    --bs-accordion-active-color: #333;
+}
+
+.accordion-item {
+    box-shadow: 0 3px 6px -1px rgba(0, 0, 0, .17);
+    border: solid 1px #dedede;
+    margin-bottom: 30px;
+    border-top: solid 1px #dedede!important;
+}
+
+.accordion-button:focus {
+    box-shadow: none;
+}
+
+/* map */
+
+.mapboxgl-canvas-container.mapboxgl-interactive.mapboxgl-touch-drag-pan.mapboxgl-touch-zoom-rotate svg {
+    width: 27px;
+    height: 41px;
+}
+
+/* additional info */
+
+.additional-main {
+    padding: 1.5rem;
+}
+
+.additional-info-container {
+    margin-top: 220px;
+}
+
+.additional-info-list {
+    margin-bottom: -10px;
+}
+
+.additional-info-list li {
+    padding: 10px 0px;
+}
+
+.additional-span {
+    color: #7f7f7f;
+}
+

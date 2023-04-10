@@ -1,0 +1,166 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5em;
+    color: #333;
+    overflow-x: hidden;
+    margin: 0;
+}
+
+.section-spacing {
+    margin-top: 80px;
+    margin-bottom: 80px;
+}
+
+.cta {
+    width:50%;
+}
+
+/* hero section */
+.header-container {
+    height: 610px;
+}
+
+.header-container.bc-header-bg {
+    background-image: url(http://localhost:3000/src/home/home-hero.jpg);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+}
+
+.hero-overlay {
+    background: rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    height: 100%;
+    z-index: 2;
+}
+
+.add-business-nav {
+    background-color: #41A6DF;
+}
+
+a.home-nav, a.all-nav, .add-business-nav, .button-text{
+    font-family: 'Poppins', sans-serif;
+    color: #fff;
+    font-size: 1rem;
+}
+
+a.home-nav:hover {
+    color: #41A6DF;
+}
+
+.add-business {
+    background-color: none!important;
+    border: 1px solid #333;
+}
+.btn-secondary {
+    color: #333;
+}
+
+.btn-secondary:hover {
+    color: #333;
+}
+
+
+
+/* why us */
+
+.bg-why-us {
+    background-color: #eff8ff;
+}
+
+.why-us-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto;
+    border-radius: 50%;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .why-us-icon i {
+    font-size: 30px;
+    color: #42A7DF;
+  }
+
+.why-us-title,
+.categories-title,
+.cta-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 30px;
+    font-weight: 700;
+}
+
+.why-us-sub {
+    font-size: 20px;
+}
+
+
+/* categories section */
+
+.object-fit-cover {
+    object-fit: cover;
+}
+
+.category-box {
+    width: 150px;
+    border-radius: 5px;
+    position: absolute;
+    bottom: 50px;
+    right: 50%;
+    transform: translateX(50%) translateY(50%);
+    background-color: #fff;
+    transition: background-color .3s;
+    cursor: pointer;
+}
+
+.category-box:hover {
+    background-color: #41A6DF;
+    color: #fff;
+}
+
+.category-text {
+    text-decoration: none;
+    color: #333;
+    font-weight: 700;
+    padding: 10px 10px;
+    margin-bottom: 0;
+}
+
+
+/* cta */
+
+.cta-bg {
+    background-color: #eff8ff;
+   
+}
+
+.cta-btn {
+    background-color: #41A6DF;
+}
+
+.cta-btn:hover {
+    background-color: #333;
+    color: #fff;
+}
+
+
+/* top rated */
+
+.listing-image {
+    height: 300px; 
+    object-fit: cover; 
+  }
+
+  .bc-title a {
+    color: #333;
+    text-decoration: none;
+    font-weight: 600;
+}
+.bc-title a:hover {
+    color: #42A7DF;
+}

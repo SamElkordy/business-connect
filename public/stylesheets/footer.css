@@ -1,0 +1,14 @@
+.footer-bg {
+    background-color: #404E5B;
+}
+
+.footer-copy {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.footer-links h6 a,
+.social-links a,
+.footer-copy a {
+    text-decoration: none;
+}
+

@@ -1,0 +1,13 @@
+
+div.success-style {
+    font-family: 'Poppins', sans-serif;
+    background-color : #acd2cc!important;
+    color: #1c1d1f!important;
+    border-radius: 0!important;
+}
+
+div.error-style {
+    font-family: 'Poppins', sans-serif;
+    border-radius: 0!important;
+    color: #1c1d1f!important;
+}

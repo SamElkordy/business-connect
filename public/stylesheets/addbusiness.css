@@ -1,0 +1,40 @@
+
+
+.bc-card-title {
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #000;
+    border-bottom: solid 1px #dedede;
+    margin-top: 0;
+    margin-bottom: 20px;
+    padding-bottom: 5px;
+}
+
+.bc-label {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+span.required-label {
+    color: red;
+}
+
+/* delete images thumbnail */
+
+.img-thumbnail {
+    max-width: 200px;
+}
+
+/* placeholders and select */
+
+.form-select,
+.form-control {
+    font-size: .9rem;
+}
+
+.add-new-div {
+    cursor: pointer;
+    text-decoration: none;
+    color: #333;
+}

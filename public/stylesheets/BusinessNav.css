@@ -1,0 +1,111 @@
+/* Navbar all businesses */
+.bc-header-full-width {
+    background-color: #42A7DF;
+}
+
+.add-business-nav {
+    background-color: #333;
+    border: 1px solid #333;
+}
+
+a.all-nav, .add-business-nav, .button-text{
+    font-family: 'Poppins', sans-serif;
+    color: #fff;
+    font-size: 1rem;
+}
+
+/* business box*/
+
+.bc-main-container {
+    padding-left: 50px;
+}
+
+.card-img, .card-img-bottom, .card-img-top {
+    height: 240px!important;
+}
+
+.bc-title a {
+    color: #333;
+    text-decoration: none;
+    font-weight: 600;
+}
+.bc-title a:hover {
+    color: #42A7DF;
+}
+
+.bc-location {
+    color: #6a6f73;
+}
+
+.bc-description {
+    color: #333;
+}
+
+/* map */
+h5.bc-title.bc-title-map {
+    padding-top: 10px;
+} 
+
+/* search term per category */
+
+.search-term-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    color: #7f7f7f;
+}
+
+.search-term {
+    font-weight: 700;
+}
+
+.search-by {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border-top: 1px solid #dedede;
+    border-bottom: 1px solid #dedede;
+}
+
+/* dropdown button */
+
+.dropdown-button, .dropdown-button:hover, .dropdown-button:focus {
+    background-color: #f8f8f8;
+    color: #7f7f7f;
+    border-radius: 3px;
+}
+
+.dropdown-item-style {
+    color: #7f7f7f;
+}
+
+/* search bar */
+
+.search-btn {
+    background-color: #41A6DF;
+    color: #fff;
+}
+.search-btn:hover {
+    background-color: #333;
+    color: #fff;
+}
+
+
+/* modal backdrop */
+.modal-backdrop {
+    z-index: 3;
+}
+
+/* pagination style */
+.page-link {
+    color: #333;
+    padding: 7px 12px;
+}
+
+ul.pagination.pagination-sm.justify-content-center {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+li.page-item {
+    padding: 0 5px;
+}
