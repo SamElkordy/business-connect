@@ -21,6 +21,7 @@ const reviewRoutes = require('./routes/reviews');
 const helmet = require("helmet");
 const Fuse = require('fuse.js');
 const Listing = require('./models/listing');
+const listings = require('./controllers/listings');
 
 const MongoStore = require('connect-mongo');
 
@@ -153,15 +154,7 @@ app.use('/listings', listingRoutes);
 app.use('/listings/:id/reviews', reviewRoutes);
 
 
-app.get('/', async (req, res) => {
-    const topListings = await Listing.find()
-    .sort({ 'reviews.rating': -1 })
-    .limit(3)
-    .populate('reviews')
-    .exec();
-    
-  res.render('home', { topListings });
-});
+app.get('/', listings.home);
 
 
 app.all('*', (req, res, next) => {
