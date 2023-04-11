@@ -18,7 +18,7 @@
 <body>
     
     <!-- hero section -->
-    <div class="header-container bc-header-bg text-center text-white">
+    <div class="header-container bc-header-bg text-center text-white mb-5">
         <div class="row hero-overlay">
             <!-- nav -->
             <div>
@@ -75,8 +75,10 @@
             </div>
         </div>
     </div>
-    <%- include('./partials/flash')%>
-    <div class="container section-spacing">
+    <div class="container">
+      <%- include('./partials/flash')%>
+  </div>
+    <div class="container mt-5">
       <h2 class="mb-4 categories-title mb-5 text-center">Popular Categories</h2>
       <div class="row d-flex align-items-stretch">
         <div class="col-md-4">
@@ -130,7 +132,7 @@
         </div>
       </div>
       
-      <div class="container section-spacing">
+      <div class="container">
         <h2 class="  cta-title text-center mb-5">Top Rated Listings</h2>
         <div class="row">
           <% topListings.forEach(function(listing) { %>

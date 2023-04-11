@@ -3,10 +3,13 @@
 <link rel="stylesheet" href="/stylesheets/submit-update.css">
 
 <div class="row mb-5">
-    <div class="bg-edit mb-5">
+    <div class="bg-edit mb-4">
         <h1 class="text-center text-white">Edit Your Business</h1>
     </div>
-    <div class="col-6 offset-3">
+    <div class="container">
+        <%- include('../partials/flash')%>
+    </div>
+    <div class="col-6 offset-3 mt-4">
         <form action="/listings/<%=listing._id%>?_method=PUT" method="POST" novalidate class="validated-form" enctype="multipart/form-data">
             <div class="card shadow mb-3">
                 <div class="card-body">
