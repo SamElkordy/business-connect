@@ -19,14 +19,13 @@ const userRoutes = require('./routes/users')
 const listingRoutes = require('./routes/listings');
 const reviewRoutes = require('./routes/reviews');
 const helmet = require("helmet");
-const Fuse = require('fuse.js');
-const Listing = require('./models/listing');
 const listings = require('./controllers/listings');
+const catchAsync = require('./utils/catchAsync');
 
 const MongoStore = require('connect-mongo');
 
 
-const dbURL = process.env.DB_URL || 'mongodb://127.0.0.1:27017/business-connect';
+const dbURL = process.env.DB_URL;
 mongoose.connect(dbURL);
 
 const db = mongoose.connection;
@@ -153,8 +152,7 @@ app.use('/', userRoutes);
 app.use('/listings', listingRoutes);
 app.use('/listings/:id/reviews', reviewRoutes);
 
-
-app.get('/', listings.home);
+app.get('/', catchAsync(listings.home));
 
 
 app.all('*', (req, res, next) => {
