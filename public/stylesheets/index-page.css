@@ -73,12 +73,6 @@ h5.bc-title.bc-title-map {
     color: #fff;
 }
 
-
-/* modal backdrop */
-.modal-backdrop {
-    z-index: 3;
-}
-
 /* pagination style */
 .page-link {
     color: #333;

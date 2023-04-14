@@ -25,3 +25,9 @@ body {
 img.logo {
     width: 200px;
 }
+
+
+/* modal backdrop */
+.modal-backdrop {
+    z-index: 3;
+}

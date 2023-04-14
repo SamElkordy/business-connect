@@ -25,7 +25,7 @@ const catchAsync = require('./utils/catchAsync');
 const MongoStore = require('connect-mongo');
 
 
-const dbURL = process.env.DB_URL;
+const dbURL =  process.env.DB_URL; 
 mongoose.connect(dbURL);
 
 const db = mongoose.connection;
